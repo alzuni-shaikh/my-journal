@@ -1,0 +1,16 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // User profile document and subcollections
+    match /users/{userId} {
+      // User can only read and write their own profile
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+
+      // User can only read, write, create, update, delete their own entries
+      match /entries/{entryId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+  }
+}
