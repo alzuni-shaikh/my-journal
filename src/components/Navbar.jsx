@@ -1,7 +1,7 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { logout } from "../firebase/auth";
-import { BookOpen, LogOut, PenSquare, User as UserIcon } from "lucide-react";
+import { BookOpen, Calendar, LayoutDashboard, LogOut, PenSquare, User as UserIcon } from "lucide-react";
 
 export default function Navbar() {
   const { user, loading } = useAuth();
@@ -39,6 +39,8 @@ export default function Navbar() {
                       to="/new"
                       className="btn btn-primary btn-sm btn-nav-write"
                       id="nav-write-btn"
+                      aria-label="Write new entry"
+                      title="Write entry"
                     >
                       <PenSquare size={15} />
                       <span className="write-text">Write</span>
@@ -50,8 +52,11 @@ export default function Navbar() {
                     className={`nav-link ${
                       location.pathname === "/journal" ? "nav-link-active" : ""
                     }`}
+                    aria-label="Dashboard"
+                    title="Dashboard"
                   >
-                    Dashboard
+                    <LayoutDashboard size={16} className="nav-link-icon" />
+                    <span className="nav-link-text">Dashboard</span>
                   </Link>
 
                   <Link
@@ -59,8 +64,11 @@ export default function Navbar() {
                     className={`nav-link ${
                       location.pathname === "/history" ? "nav-link-active" : ""
                     }`}
+                    aria-label="History"
+                    title="History"
                   >
-                    History
+                    <Calendar size={16} className="nav-link-icon" />
+                    <span className="nav-link-text">History</span>
                   </Link>
 
                   <div className="nav-user-pill">
